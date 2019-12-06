@@ -1,15 +1,16 @@
 import os
 import requests
 import requests.auth
+from jenkins_credentials import jenkins_host
+from jenkins_credentials import jenkins_user_password
+from jenkins_credentials import jenkins_user_login
+from jenkins_credentials import jobs_directory_name
+from jenkins_tools import check_jenkins_available
+from jenkins_tools import is_job_folder
+from jenkins_tools import config_file_name
 
-base_directory_name = "jobs"
-config_file_name = "config.xml"
 
-jenkins_host = "http://localhost:9080"
-jenkins_api_endpoint = jenkins_host + "/api/"
 jenkins_create_part = "createItem"
-jenkins_user_login = "abarmin"
-jenkins_user_password = "rw5oj40"
 
 
 def process_jobs(parent_directory: str):
@@ -20,10 +21,6 @@ def process_jobs(parent_directory: str):
 def process_job_folder(folder_name: str, files: []):
     if is_job_folder(files):
         create_jenkins_job(folder_name)
-
-
-def is_job_folder(files: []):
-    return config_file_name in files
 
 
 def create_jenkins_job(folder_name: str):
@@ -41,22 +38,8 @@ def create_jenkins_job(folder_name: str):
         raise Exception("Can't create a job with name " + folder_name)
 
 
-def check_jenkins_available():
-    print("Checking if Jenkins available")
-    auth = requests.auth.HTTPBasicAuth(jenkins_user_login, jenkins_user_password)
-    response = requests.get(get_jenkins_xml_endpoint(), auth=auth)
-    if response.status_code != 200:
-        raise Exception("Jenkins is not available")
-    else:
-        print("... Checked, Jenkins works")
-
-
-def get_jenkins_xml_endpoint():
-    return jenkins_api_endpoint + "xml"
-
-
 def get_jenkins_create_endpoint(folder_name: str):
-    folder_name = folder_name.replace(base_directory_name + "\\", "")
+    folder_name = folder_name.replace(jobs_directory_name + "\\", "")
     parts = folder_name.split("\\")
     new_job_name = parts[len(parts) - 1]
     parts.remove(new_job_name)
@@ -68,4 +51,4 @@ def get_jenkins_create_endpoint(folder_name: str):
 
 if __name__ == '__main__':
     check_jenkins_available()
-    process_jobs(base_directory_name)
+    process_jobs(jobs_directory_name)
