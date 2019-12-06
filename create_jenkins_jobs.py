@@ -66,5 +66,6 @@ def get_jenkins_create_endpoint(folder_name: str):
     return endpoint + "/" + jenkins_create_part + "?name=" + new_job_name
 
 
-check_jenkins_available()
-process_jobs(base_directory_name)
+if __name__ == '__main__':
+    check_jenkins_available()
+    process_jobs(base_directory_name)

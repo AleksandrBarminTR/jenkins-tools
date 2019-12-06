@@ -22,7 +22,7 @@
     </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
     <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty/>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.29.5">
-      <projectUrl>https://github.com/tr/modern-ellis_service-legacy-extractor/</projectUrl>
+      <projectUrl>https://github.com/tr/modern-ellis_service-ingest-alerter/</projectUrl>
       <displayName></displayName>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
@@ -31,13 +31,13 @@
       <configVersion>2</configVersion>
       <userRemoteConfigs>
         <hudson.plugins.git.UserRemoteConfig>
-          <url>https://github.com/tr/modern-ellis_service-legacy-extractor.git</url>
+          <url>https://github.com/tr/modern-ellis_service-ingest-alerter.git</url>
           <credentialsId>TR_GH_ACCOUNT</credentialsId>
         </hudson.plugins.git.UserRemoteConfig>
       </userRemoteConfigs>
       <branches>
         <hudson.plugins.git.BranchSpec>
-          <name>*/master</name>
+          <name>*/dev</name>
         </hudson.plugins.git.BranchSpec>
       </branches>
       <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
